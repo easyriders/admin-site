@@ -9,8 +9,8 @@ then
 
     if [ -z `which virtualenv` ]
     then
-        sudo apt-get update
-        sudo apt-get install -y virtualenv
+        apt-get update
+        apt-get install -y python3-venv
     fi
 
     DIR=$(pwd)
@@ -26,7 +26,7 @@ then
 fi
 
 rm -rf $BIBOS_VIRTUAL_ENV
-virtualenv -p python3 $BIBOS_VIRTUAL_ENV
+python3 -m venv $BIBOS_VIRTUAL_ENV
 source $BIBOS_VIRTUAL_ENV/bin/activate
 
 DIR=$(dirname ${BASH_SOURCE[0]})
@@ -34,7 +34,7 @@ PYTHON_PACKAGES=$(cat "$DIR/PYTHON_DEPENDENCIES")
 
 for  package in "${PYTHON_PACKAGES[@]}"
 do
-    pip install $package
+    pip3 install $package
 
     RETVAL=$?
     if [ $RETVAL -ne 0 ]; then
